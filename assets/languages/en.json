@@ -1,0 +1,17 @@
+{
+	"appName": "amplify",
+	"phone_text": "mobileNumber",
+	"skip": "Skip for now",
+	"login": "Login / SignUP",
+	"verifyCode": "Verify Code",
+	"verifyCodeDesc": "Enter verification code",
+	"verifyCodeDetails": "We have sent you a 6 digit verification code on",
+	"resendCode": "Resend Code",
+	"timeElapsed": "Time elapsed",
+	"yourLocation": "Your Location",
+	"homeTab": "Home",
+	"bookingsTab": "Bookings",
+	"helpTab": "Help",
+	"rewardsTab": "Rewards",
+	"cartTab": "Cart"
+}

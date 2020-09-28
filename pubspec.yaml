@@ -1,0 +1,40 @@
+name: amplify
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+  flutter_svg:
+  #flutter_facebook_auth: ^0.3.1+1
+  webview_flutter: ^0.3.24
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+  assets:
+    - assets/icons/facebook.jpg
+    - assets/icons/google.jpg
+    - assets/icons/facebook-svgrepo-com.svg
+    - assets/icons/google-svgrepo-com.svg
+    - assets/languages/en.json
+    - assets/languages/te.json
