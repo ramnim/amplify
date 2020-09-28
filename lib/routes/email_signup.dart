@@ -132,7 +132,45 @@ class _EmailDetailsState extends State<EmailDetails> {
   }
 }
 Widget passwordDetails() {
-  return Center (
-    child: Text14('password'),
+  return Scaffold (
+    resizeToAvoidBottomInset: false,
+    backgroundColor: Colors.white,
+    body: Center(
+      child: Column (
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ConstrainedBox(constraints: BoxConstraints(minHeight: 10, maxHeight: 20)),
+          CustomText(regText: "Choose a password",
+              fontColor: Colors.black,
+              align: MainAxisAlignment.start
+          ),
+          CustomTextField(hintText: 'Password',
+            borderColor: Colors.grey[700],
+            assignValueCallback: (value) {
+              print ('----- password: $value -----');
+            },
+          ),
+          CustomTextField(hintText: 'Confirm password',
+            borderColor: Colors.grey[700],
+            assignValueCallback: (value) {},
+          ),
+          CustomText(regText: "X Maximum of 8 characters", fontColor: Colors.red,
+            align: MainAxisAlignment.start),
+          CustomText(regText: "X A capital letter", fontColor: Colors.red,
+              align: MainAxisAlignment.start),
+          CustomText(regText: "X A lowercase letter", fontColor: Colors.red,
+              align: MainAxisAlignment.start),
+          CustomText(regText: "X A number", fontColor: Colors.red,
+              align: MainAxisAlignment.start),
+          CustomText(regText: "X Both boxes match", fontColor: Colors.red,
+              align: MainAxisAlignment.start),
+          ConstrainedBox(constraints: BoxConstraints(minHeight: 10, maxHeight: 20)),
+          CustomButton(text: 'CONTINUE', bgColor: Color(0xfff2d493),
+            fontColor: Colors.black,
+            onPressed: () {},
+          ),
+        ],
+      ),
+    ),
   );
 }
