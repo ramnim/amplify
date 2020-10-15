@@ -23,8 +23,17 @@ class _BusyPageState extends State<BusyPage> {
     return Material (
       color: Colors.black,
       child: Center (
-        child: Text(_seconds.toString(),
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        child: Stack (
+          alignment: Alignment.center,
+          children: <Widget> [
+            Container(
+              width: 100, height: 100,
+              child: CircularProgressIndicator(),
+            ),
+            Text(_seconds.toString(),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:amplify/config/consts.dart';
 import 'package:flutter/material.dart';
-import 'package:amplify/config/theme.dart';
+//import 'package:amplify/config/theme.dart';
 import 'package:amplify/custom_widgets/custom_button.dart';
 import 'package:amplify/custom_widgets/custom_text.dart';
 import 'package:amplify/custom_widgets/custom_text_field.dart';
@@ -13,64 +13,85 @@ class EmailSignup extends StatefulWidget {
   _EmailSignupState createState() => _EmailSignupState();
 }
 
-class _EmailSignupState extends State<EmailSignup> {
-  int _tabIndex;
+class _EmailSignupState extends State<EmailSignup> with SingleTickerProviderStateMixin {
+  TabController _tabController;
+
   void initState() {
     super.initState();
-    _tabIndex = 0;
+    _tabController = TabController(length: 2, vsync: this,
+      initialIndex: 0, // optional, because default index is zero
+    );
+    _tabController.addListener(() {_refresh(_tabController.index);});
   }
   @override
   Widget build(BuildContext context) {
-    print ('---- emailSignup got refreshed -----');
+    double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: Icon(Icons.arrow_back_ios),
       ),
-      body: DefaultTabController (
-        initialIndex: _tabIndex,
-        length: 2,
-        child: Scaffold (
-          appBar: PreferredSize (
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar (
-            backgroundColor: Colors.black,
-            centerTitle: false,
-            titleSpacing: 0.0,
-            leadingWidth: 5.0,
-            //toolbarHeight: 75.0,
-            //leading: Container(),
-            flexibleSpace: Row (
-              children: [
-                SizedBox(width: 10.0,),
-                Text ('SIGN UP', style: TextStyle(color: Color(0xfff2d493))),
-              ]
-            ),
-            bottom: TabBar (
-              indicatorColor: Color(0xfff2d493),
-              indicatorWeight: 3,
-              indicatorPadding: EdgeInsets.only(left:10),
-              tabs: [
-                Tab (child: Divider(thickness: 3,),),
-                Tab (child: Divider(thickness: 3,),),
-              ],
-            ),
-          ),
-          ),
-          body: TabBarView (
+      body: Scaffold (
+        appBar: PreferredSize (
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar (
+          backgroundColor: Colors.black,
+          centerTitle: false,
+          titleSpacing: 0.0,
+          leadingWidth: 5.0,
+          //toolbarHeight: 75.0,
+          //leading: Container(),
+          flexibleSpace: Row (
             children: [
-              EmailDetails(callback: _refresh,),
-              passwordDetails(),
+              SizedBox(width: 10.0,),
+              Text ('  SIGN UP', style: TextStyle(color: Color(0xfff2d493))),
             ]
-          )
+          ),
+          bottom: TabBar (
+            //indicatorColor: Color(0xfff2d493),
+            indicatorColor: Colors.black,
+            //indicatorWeight: 3,
+            //unselectedLabelColor: Colors.white,
+            labelColor: Colors.white,
+            //indicatorPadding: EdgeInsets.only(left:10, top:0,),
+            //labelPadding: EdgeInsets.only(bottom: 1,),
+            //indicator: BoxDecoration(border: Border.all(width: 2, color:Colors.white)),
+            //indicator: UnderlineTabIndicator (
+            //  borderSide: BorderSide(width:3.0, color: Color(0xfff2d493)),
+            //  insets: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0)
+            //),
+            tabs: [
+              Tab (child: Container(width: _width * 0.4, decoration: BoxDecoration(border: Border(bottom:BorderSide(color: Color(0xfff2d493), width:3.0))), child: Divider(thickness: 3,),),),
+              Tab (child: Container(width: _width * 0.4, decoration: BoxDecoration(border: Border(bottom:BorderSide(color: _tabController.index == 1 ? Color(0xfff2d493) : Colors.white, width:_tabController.index == 1 ? 3.0 : 1.0))), child: Divider(thickness: 3,),),),
+              //Tab (child: Container(width: _width * 0.4, decoration: BoxDecoration(border: Border(bottom:BorderSide(color:Colors.white, width:1.0))),),),
+              //Container (decoration: BoxDecoration(border:Border(bottom:BorderSide(color:Colors.white, width:1.0))), child: Tab (child: Container(width: _width * 0.4, child: Divider(thickness: 3,),),),),
+              //Container (alignment: Alignment.topCenter, child: Tab (child: Container(width: _width * 0.4, child: Divider(thickness: 3,),),),),
+              //Tab (child: Container(width: _width * 0.4, child: Divider(thickness: 3,),),),
+              //Tab (child: Divider(thickness: 3,),),
+            ],
+            controller: _tabController,
+            isScrollable: true, // default false
+          ),
         ),
+        ),
+        body: TabBarView (
+          children: [
+            EmailDetails(callback: _refresh,),
+            passwordDetails(),
+          ],
+          controller: _tabController,
+        )
       )
     );
+  }
+  void dispose () {
+    _tabController.dispose();
+    super.dispose();
   }
   void _refresh(int index) {
     print ('----- new index: $index -----');
     setState ( () {
-      _tabIndex = index;
+      _tabController.index = index;
     });
   }
 }
